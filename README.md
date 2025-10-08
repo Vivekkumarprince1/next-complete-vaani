@@ -170,12 +170,153 @@ next/
 
 ## 🚢 Deployment
 
-Deploy to Vercel:
-```bash
-vercel
+### Deploy to Vercel (Recommended for Fullstack)
+
+This app is configured for seamless deployment on Vercel with the included `vercel.json` file.
+
+#### Quick Deploy to Vercel
+
+1. **Connect your repository to Vercel**
+2. **Set environment variables in Vercel dashboard:**
+   - `MONGO_URI` - Your MongoDB connection string
+   - `JWT_SECRET` - Secure JWT secret
+   - `AZURE_SPEECH_KEY` & `AZURE_SPEECH_REGION` - Azure Speech Services
+   - `AZURE_TRANSLATOR_KEY` & `AZURE_TRANSLATOR_REGION` - Azure Translator
+   - `NODE_ENV=production`
+   - `FORCE_SOCKET_SERVER=true` (automatically set in vercel.json)
+
+3. **Deploy** - Vercel will automatically build and deploy your fullstack app with Socket.IO
+
+#### Vercel Configuration Details
+
+The `vercel.json` file includes:
+- Custom server routing to `server.js`
+- WebSocket support with 30-second function timeout
+- Production environment variables
+- Standalone Next.js build output
+
+### Self-Hosted Server
+
+For deploying to your own server (VPS, AWS EC2, DigitalOcean, etc.):
+
+#### Prerequisites
+- Ubuntu/Debian server with Node.js 20+ installed
+- MongoDB (local or cloud)
+- Domain name (optional but recommended)
+- SSL certificate (for HTTPS)
+
+#### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/next-complete-vaani.git
+   cd next-complete-vaani
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+   
+   Set the following variables:
+   ```env
+   NODE_ENV=production
+   MONGO_URI=mongodb://localhost:27017/vaani  # or your MongoDB Atlas URI
+   JWT_SECRET=your_secure_jwt_secret_here
+   AZURE_SPEECH_KEY=your_azure_speech_key
+   AZURE_SPEECH_REGION=your_azure_region
+   AZURE_TRANSLATOR_KEY=your_azure_translator_key
+   AZURE_TRANSLATOR_REGION=your_azure_region
+   PORT=3000
+   ALLOWED_ORIGINS=https://yourdomain.com  # your frontend URL
+   ```
+
+4. **Build the application**
+   ```bash
+   npm run build
+   ```
+
+5. **Start the server**
+   ```bash
+   npm start
+   ```
+
+#### Production Setup with PM2
+
+For production, use PM2 for process management:
+
+1. **Install PM2 globally**
+   ```bash
+   npm install -g pm2
+   ```
+
+2. **Create ecosystem file**
+   ```bash
+   nano ecosystem.config.js
+   ```
+   
+   Add:
+   ```javascript
+   module.exports = {
+     apps: [{
+       name: 'vaani-app',
+       script: 'server.js',
+       env: {
+         NODE_ENV: 'production',
+         PORT: 3000
+       }
+     }]
+   };
+   ```
+
+3. **Start with PM2**
+   ```bash
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 startup
+   ```
+
+#### Nginx Configuration (for reverse proxy)
+
+Create `/etc/nginx/sites-available/vaani`:
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
 ```
 
-Or push to GitHub and connect to Vercel/Netlify.
+Enable the site:
+```bash
+sudo ln -s /etc/nginx/sites-available/vaani /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+#### SSL with Let's Encrypt
+
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d yourdomain.com
+```
 
 ## 🤝 Contributing
 

@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start:next": "next start",
+    "prod": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
