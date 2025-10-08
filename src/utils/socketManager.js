@@ -45,7 +45,7 @@ class SocketManager {
     
     const socketOptions = {
       auth: { token: this.token },
-      path: '/api/socket',
+      path: '/socket.io',
       reconnection: true,
       reconnectionAttempts: this.maxAttempts,
       reconnectionDelay: 2000,
