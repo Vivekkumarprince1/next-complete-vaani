@@ -2,6 +2,9 @@
   "name": "next",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
     "dev": "node server.js",
     "dev:next": "next dev --turbopack",
@@ -29,14 +32,14 @@
     "react-select": "^5.10.2",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "tailwindcss": "^4",
+    "@tailwindcss/postcss": "^4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.55.1",
-    "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "15.5.4",
-    "tailwindcss": "^4"
+    "eslint-config-next": "15.5.4"
   }
 }
