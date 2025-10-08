@@ -2,23 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "src": "package.json",
+      "use": "@vercel/next"
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "FORCE_SOCKET_SERVER": "true"
-  },
-  "functions": {
-    "server.js": {
-      "maxDuration": 30
-    }
+    "NODE_ENV": "production"
   }
 }

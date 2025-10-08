@@ -9,7 +9,7 @@ class SocketManager {
   constructor() {
     this.socket = null;
     this.token = null;
-    console.log('->NEXT_PUBLIC_SOCKET_URL:', process.env.NEXT_PUBLIC_SOCKET_URL);
+    console.log('NEXT_PUBLIC_SOCKET_URL:', process.env.NEXT_PUBLIC_SOCKET_URL);
     // Use NEXT_PUBLIC_SOCKET_URL if defined, otherwise default to current origin in browser or localhost in non-browser    
     this.baseUrl = process.env.NEXT_PUBLIC_SOCKET_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
   // event -> Set of handlers
@@ -45,7 +45,7 @@ class SocketManager {
     
     const socketOptions = {
       auth: { token: this.token },
-      path: '/socket.io',
+      path: '/api/socket',
       reconnection: true,
       reconnectionAttempts: this.maxAttempts,
       reconnectionDelay: 2000,

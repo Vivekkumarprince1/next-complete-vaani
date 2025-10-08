@@ -8,9 +8,11 @@
   "scripts": {
     "dev": "node server.js",
     "dev:next": "next dev --turbopack",
+    "dev:socket": "FORCE_SOCKET_SERVER=true node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start:next": "next start",
+    "start:socket": "NODE_ENV=production FORCE_SOCKET_SERVER=true node server.js",
     "prod": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "test:e2e": "playwright test",
