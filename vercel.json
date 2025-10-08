@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "env": {
+    "NODE_ENV": "production",
+    "FORCE_SOCKET_SERVER": "true"
+  }
+}
