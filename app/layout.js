@@ -12,15 +12,13 @@ export default function RootLayout({
   children,
 }) {
   return (
-    <html lang="en">
-      <body>
-        <AuthProvider>
-          <TranslationProvider>
-            {children}
-          </TranslationProvider>
-        </AuthProvider>
-        <Analytics />
-      </body>
-    </html>
+    <>
+      <AuthProvider>
+        <TranslationProvider>
+          {children}
+        </TranslationProvider>
+      </AuthProvider>
+      <Analytics />
+    </>
   )
 }
