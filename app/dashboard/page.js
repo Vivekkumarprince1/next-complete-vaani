@@ -18,6 +18,8 @@ import SocketStatus from '../../src/components/SocketStatus';
 import CreateGroupModal from '../../src/components/CreateGroupModal';
 import GroupManagementModal from '../../src/components/GroupManagementModal';
 
+export const dynamic = 'force-dynamic';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 const Dashboard = () => {

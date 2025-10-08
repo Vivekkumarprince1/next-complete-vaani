@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { AuthContext } from '../../src/contexts/AuthContext';
 import Loader from '../../src/components/Loader';
 
+export const dynamic = 'force-dynamic';
+
 const Login = () => {
   const [formData, setFormData] = useState({
     mobileNumber: '',

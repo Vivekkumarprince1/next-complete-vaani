@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // outputFileTracingRoot: '/Users/vivekkumar/Desktop/vaani/vaani-next',
+  output: 'standalone',
 };
 
 export default nextConfig;
