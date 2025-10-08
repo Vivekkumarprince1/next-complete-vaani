@@ -1,3 +1,8 @@
+// backup of pages/_document.js
+// Moved because this project uses the App Router (app/). Keeping this file
+// can cause Next.js to import Html outside of pages/_document during certain
+// prerender/export operations and fail builds on some hosts.
+
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
